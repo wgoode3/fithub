@@ -8,6 +8,6 @@ class DailyStat(models.Model):
     protein = models.FloatField()
     carbohydrates = models.FloatField()
     fats = models.FloatField()
-    user = models.ForeignKeyField(User, on_delete=models.CASCADE)
+    user = models.ForeignKeyField(User, related_name="daily_stats", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
