@@ -6,15 +6,16 @@ User._meta.get_field('email').blank = False
 User._meta.get_field('email').null = False
 
 class Profile(models.Model):
-    GENDER_CHOICES = (
+    GENDERS = (
         ("MALE", "Male"),
         ("FEMALE", "Female"),
         ("OTHER", "I prefer not to answer")
     )
 
-    user = models.OneToOneField(User, on_delete=models.Cascade)
+    user = models.OneToOneField(User, related_name="my_profile", on_delete=models.Cascade)
+    # TODO user_avatar
     goal_weight = models.FloatField()
     height = models.FloatField()
-    gender = models.CharField(choices=GENDER_CHOICES)
+    gender = models.CharField(choices=GENDERS)
     date_of_birth = models.DateField()
     updated_at = models.DateTimeField(auto_now=True)
