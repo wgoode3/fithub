@@ -1,26 +1,32 @@
 from django.db import models
 from stat_app import DailyStat
 
-UNITS = (
-    # non-dimensional
-    ("SERVING", "SERVING"),
-    ("SLICE", "SLICE"),
-    ("PACKAGE", "PACKAGE"),
-    ("PACKET", "PACKET"),
-    ("BOWL", "BOWL"),
-    ("BAR", "BAR"),
-    ("CUP", "CUP"),
-    # volume
-    ("TEASPOON", "TEASPOON"),
-    ("TABLESPOON", "TABLESPOON"),
-    ("FLUID OUNCE", "FLUID OUNCE"),
-    ("CUP", "CUP"),
-    ("PINT", "PINT"),
-    ("MILLILITER", "MILLILITER"),
-    ("LITER", "LITER"),
-    # mass
-    ("OUNCE", "OUNCE"),
-    ("GRAM", "GRAM")
+UNIT_CHOICES = (
+    ('non-dimensional', (
+            ('serving', 'serving'),
+            ('slice', 'slice'),
+            ('package', 'package'),
+            ('packet', 'packet'),
+            ('bowl', 'bowl'),
+            ('cup', 'cup'),
+            ('bar', 'bar')
+        )
+    ),
+    ('volume', (
+            ('teaspoon', 'teaspoon'),
+            ('tablespoon', 'tablespoon'),
+            ('fluid ounce', 'fluid ounce'),
+            ('cup', 'cup'),
+            ('pint', 'pint'),
+            ('milliliter', 'milliliter'),
+            ('liter', 'liter')
+        )
+    ),
+    ('mass', (
+            ("ounce", "ounce"),
+            ("gram", "gram")
+        )
+    )
 )
 
 class Food(models.Model):
@@ -30,13 +36,13 @@ class Food(models.Model):
     carbohydrates_per_amount = models.FloatField()
     fats_per_amount = models.FloatField()
     serving_size = models.FloatField()
-    units = models.CharField(choices=UNITS)
+    units = models.CharField(choices=UNIT_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class FoodAmount(models.Model):
     value = models.FloatField()
-    units = models.CharField(choices=UNITS)
+    units = models.CharField(choices=UNIT_CHOICES)
     food = models.ForeignKeyField(Food, on_delete=models.CASCADE)
     day = models.ForeignKeyField(DailyStat, related_name="meals", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
