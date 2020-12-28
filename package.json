@@ -1,0 +1,25 @@
+{
+  "name": "fithub",
+  "version": "1.0.0",
+  "description": "Fitness tracking app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wgoode3/fithub.git"
+  },
+  "keywords": [
+    "django",
+    "djangorest",
+    "react",
+    "d3js"
+  ],
+  "author": "Marisa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wgoode3/fithub/issues"
+  },
+  "homepage": "https://github.com/wgoode3/fithub#readme"
+}
