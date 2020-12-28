@@ -1,5 +1,5 @@
 from django.db import models
-from stat_app import DailyStat
+from stat_app.models import DailyStat
 
 UNIT_CHOICES = (
     ('non-dimensional', (
@@ -30,20 +30,20 @@ UNIT_CHOICES = (
 )
 
 class Food(models.Model):
-    name = models.CharField()
+    name = models.CharField(max_length=255)
     calories_per_amount = models.FloatField()
     protein_per_amount = models.FloatField()
     carbohydrates_per_amount = models.FloatField()
     fats_per_amount = models.FloatField()
     serving_size = models.FloatField()
-    units = models.CharField(choices=UNIT_CHOICES)
+    units = models.CharField(max_length=11, choices=UNIT_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class FoodAmount(models.Model):
     value = models.FloatField()
-    units = models.CharField(choices=UNIT_CHOICES)
-    food = models.ForeignKeyField(Food, on_delete=models.CASCADE)
-    day = models.ForeignKeyField(DailyStat, related_name="meals", on_delete=models.CASCADE)
+    units = models.CharField(max_length=11, choices=UNIT_CHOICES)
+    food = models.ForeignKey(Food, on_delete=models.CASCADE)
+    day = models.ForeignKey(DailyStat, related_name="meals", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
