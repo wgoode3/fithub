@@ -4,6 +4,7 @@
   "description": "Fitness tracking app",
   "main": "index.js",
   "scripts": {
+    "start": "./start-dev.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
